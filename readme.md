@@ -7,7 +7,7 @@
 |1.   |2023. 09. 14.|Bevezetés, JS alapok       |
 |2.   |2023. 09. 21.|DOM, eseménykezelés I.     |
 |3.   |2023. 09. 28.|Eseménykezelés II.         |
-|4.   |2023. 10. 05.|CsoportZH, kódszervezás    |
+|4.   |2023. 10. 05.|CsoportZH, kódszervezés    |
 |5.   |2023. 10. 12.|Localstorage, canvas       |
 |6.   |2023. 10. 19.|Flappy bird                |
 |7.   |2023. 10. 26.|PHP alapok, HTML generálás |
