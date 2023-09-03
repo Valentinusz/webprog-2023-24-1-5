@@ -9,7 +9,7 @@
 
 ## ![Követelmények]()
 
-## ![5. kurzus github repoja]()
+## ![5-ös kurzus github repoja]()
 
 ## Konzultáció
 Az kurzushoz heti egy 45 perc konzultáció tartozik. Én ezt "tömbösítve" tartanám a számonkérések előtt.
