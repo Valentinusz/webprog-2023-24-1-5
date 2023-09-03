@@ -1,4 +1,4 @@
-# Webprogramozás - Boda Bálint
+# Webprogramozás - PTI BSc nappali 2. kurzus
 
 ## Tematika
 
