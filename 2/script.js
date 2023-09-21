@@ -83,8 +83,36 @@ copyButton.addEventListener('click', () => {
 const links = document.querySelectorAll('a');
 links.forEach(({href}) => console.log(href))
 
+// 10. Készíts egy számláló komponenst! (number input és egy csökkentő növelő gomb)
+let value = 0;
 
-// 10. Készíts egy számláló komponenst!
+const counterDiv = document.createElement('div');
+const incButton = document.createElement('button');
+incButton.innerText = '+';
+
+const decButton = document.createElement('button');
+decButton.innerText = '-';
+
+const counter = document.createElement('h3');
+counter.innerText = value;
+
+const plus = () => {
+    value++;
+    counter.innerText = value;
+}
+const minus = () => {
+    value--;
+    counter.innerText = value;
+}
+
+incButton.addEventListener('click', plus);
+decButton.addEventListener('click', minus);
+
+counterDiv.appendChild(decButton);
+counterDiv.appendChild(counter);
+counterDiv.appendChild(incButton);
+
+document.querySelector('#task10').appendChild(counterDiv)
 
 // 12. Készíts webes alkalmazást kamatos kamat számolására.
 // A számoláshoz meg kell adni a kiindulási összeget, a kamat értékét, valamint azt, hány évvel későbbi összegre vagyunk
