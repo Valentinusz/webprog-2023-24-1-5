@@ -65,18 +65,64 @@ for (let i = 1; i <= size; i++) {
 thirdTask.appendChild(table);
 // 6. Adott két szöveges beviteli mező és köztük egy gomb.
 // A gomb lenyomására másold át az egyik szöveges beviteli mező tartalmát a másikba!
+const task6Div = document.querySelector('article#task-6');
+
+const input1 = task6Div.querySelector('label input');
+const input2 = task6Div.querySelector('label:nth-of-type(2) input');
+console.log(input1, input2);
+const copyButton = task6Div.querySelector('button');
+
+copyButton.addEventListener('click', () => {
+    input2.value = input1.value
+})
 
 // 7. Egy űrlapon csak akkor kérd be a leánykori nevet, ha nő az illető! Használd a rádiógombok click eseményét!
 // A megjelenítéshez, eltűntetéshez használd az elemek hidden tulajdonságát!
 
 // 8. Oldalbetöltéskor listázd ki az oldal összes hiperhivatkozásának a címét!
+const links = document.querySelectorAll('a');
+links.forEach(({href}) => console.log(href))
 
-// 10. Készíts egy számlálót komponenst!
+
+// 10. Készíts egy számláló komponenst!
 
 // 12. Készíts webes alkalmazást kamatos kamat számolására.
 // A számoláshoz meg kell adni a kiindulási összeget, a kamat értékét, valamint azt, hány évvel későbbi összegre vagyunk
 // kíváncsiak. Minden év végén adjuk hozzá a kamatot a tőkéhez, és a következő évben az képezi a kamatozás alapját.
 // A feladat során jelenítsük meg azt is, hogy melyik évben hogyan változik az összeg.
+const task12div = document.querySelector('article#task12');
+const moneyInput = task12div.querySelector('#money');
+const interestInput = task12div.querySelector('#interest');
+const yearInput = task12div.querySelector('#year');
+const calculateButton = task12div.querySelector('#calculate');
+const moneyTableBody = task12div.querySelector('#breakdown').tBodies[0];
+
+console.log(moneyInput, interestInput, yearInput, calculateButton, moneyTableBody);
+
+calculateButton.addEventListener('click', () => {
+    let money = Number.parseInt(moneyInput.value, 10);
+    const interest = Number.parseFloat(interestInput.value, 10);
+    const year = Number.parseInt(yearInput.value, 10);
+
+    if (money && interest && year) {
+        //moneyTableBody.innerText = "";
+
+        while(moneyTableBody.firstChild) {
+            moneyTableBody.firstChild.remove();
+        }
+
+        for (let index = 0; index <= year; index++) {
+            const row = document.createElement('tr');
+            row.innerHTML = `<td>${index}</td><td>${money}</td>`;
+            money *= (1 + (interest / 100));
+
+            moneyTableBody.appendChild(row);
+        }
+
+    } else {
+        console.error('Hibás bementi értékek!');
+    }
+})
 
 // 14. Adott egy könyvtári nyilvántartás. Egy könyvről a következő adatokat tároljuk:
 // szerző cím kiadás éve kiadó ISBN szám
