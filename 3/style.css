@@ -1,0 +1,16 @@
+table#game td {
+    width: 4rem;
+    height: 4rem;
+    background-color: lightblue;
+    color: lightblue;
+    border: 1px solid lightblue;
+}
+
+table#game td.selected {
+    border-color: salmon;
+    color: black;
+}
+
+table#game td.flipped {
+    background-color: green;
+}
