@@ -83,7 +83,7 @@ document.addEventListener('click', event => {
             event.preventDefault();
         }
     }
-})
+});
 
 // 11.
 // Adott egy GYIK oldal. Ezen egy faq stílusosztályú elemen belül vannak a kérdések válaszok. A kérdések h3 elemben, a 
@@ -97,9 +97,66 @@ faqDiv.addEventListener('click', event => {
 
         answer.hidden = !answer.hidden;
     }
-})
+});
 
 // 8. Készíts memóriajátékot!
+const Memory = size => {
+    // Állapottér
+    let firstSelectedCard = null;
+    let bothFlipped = false;
+
+    // Eseménykezelő
+    const handleClick = event => {
+        if (event.target.matches('td') && !bothFlipped && !event.target.classList.contains('flipped')) {
+            if (firstSelectedCard && !event.target.classList.contains('selected')) {
+                bothFlipped = true;
+                const secondSelectedCard = event.target;
+                secondSelectedCard.innerText = secondSelectedCard.dataset.number;
+                secondSelectedCard.classList.add('selected');
+
+                if (firstSelectedCard.dataset.number === secondSelectedCard.dataset.number) {
+                    firstSelectedCard.classList.add('flipped');
+                    secondSelectedCard.classList.add('flipped');
+                }
+
+                setTimeout(() => {
+                    firstSelectedCard.classList.remove('selected');
+                    secondSelectedCard.classList.remove('selected')
+                    firstSelectedCard.innerText = "";
+                    secondSelectedCard.innerText = "";
+                    firstSelectedCard = null;
+                    bothFlipped = false;
+                }, 2000)
+
+
+            } else {
+                firstSelectedCard = event.target;
+                firstSelectedCard.classList.add('selected');
+                firstSelectedCard.innerText = firstSelectedCard.dataset.number;
+            }
+        }
+    }
+
+    // Markup / HTML
+    const gameTable = document.createElement('table');
+    gameTable.id = 'game';
+    gameTable.addEventListener('click', handleClick);
+
+    shuffleCards(4).forEach(row => {
+        const tr = document.createElement('tr');
+        row.forEach(cell => {
+            const td = document.createElement('td');
+            td.dataset.number = cell;
+            tr.appendChild(td);
+        })
+        gameTable.appendChild(tr);
+    })
+
+    return gameTable;
+}
+
+document.querySelector('div#memory').appendChild(Memory(4));
+
 
 /**
  * Helper function to create the arrangement of cards in the memory game.
