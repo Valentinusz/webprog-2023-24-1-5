@@ -32,9 +32,47 @@
 // f) span elemre kattintva a span elem szövegét.
 // g) Ha a hivatkozás szövege "libero", akkor ne kövesse a hivatkozást.
 
+const paragraph = document.querySelector('p#lorem');
+
+paragraph.addEventListener('click', event => {
+    console.log(event.target);
+
+    // típus
+    console.log(event.type);
+
+    // eseményspecfikius adattagok
+    console.log(event.clientX, event.clientY);
+
+    // amire eseménykezelő van
+    console.log(event.currentTarget);
+
+    // CSS szelektor
+    if (event.target.matches('a') && event.target.innerText === 'libero') {
+        event.preventDefault();
+    }
+})
+
 // 4. Készítsünk egy csak számokat elfogadó mezőt.
 // a) Gépelés közben meg se jelenjenek a számoktól eltérő karakterek.
 // b) A megoldás működjön minden olyan szöveges beviteli mezőre, amelynek szam stílusosztály be van állítva.
+
+const handleInput = event => {
+    const input = event.target;
+
+    if (!(/^d*$/).test(input.value)) {
+        input.value = input.value.replace(/[^\d/]/g, '');
+    }
+}
+
+// document.querySelectorAll('input.szam').forEach(input => input.addEventListener('input', handleInput));
+
+// delegálás
+
+document.addEventListener('input', event => {
+    if (event.target.matches('input.szam')) {
+        handleInput(event);
+    }
+})
 
 // 5. Az oldalon minden olyan hivatkozást tiltsunk le, amelyik nem ELTÉs címre mutat! 
 
