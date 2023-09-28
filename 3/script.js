@@ -74,11 +74,30 @@ document.addEventListener('input', event => {
     }
 })
 
-// 5. Az oldalon minden olyan hivatkozást tiltsunk le, amelyik nem ELTÉs címre mutat! 
+// 5. Az oldalon minden olyan hivatkozást tiltsunk le, amelyik nem ELTÉs címre mutat!
+document.addEventListener('click', event => {
+    if (event.target.matches('a')) {
+        const link = event.target;
+
+        if (!link.href.includes('.elte.hu')) {
+            event.preventDefault();
+        }
+    }
+})
 
 // 11.
-// Adott egy GYIK oldal. Ezen egy faq stílusosztályú elemen belül vannak a kérdések válaszok. A kérdések h2 elemben, a 
+// Adott egy GYIK oldal. Ezen egy faq stílusosztályú elemen belül vannak a kérdések válaszok. A kérdések h3 elemben, a 
 // válaszok közvetlenül utána p elemekben vannak. Oldjuk meg, hogy egy kérdésre kattintva a válasz eltűnjön/megjelenjen!
+const faqDiv = document.querySelector('div.faq');
+
+faqDiv.addEventListener('click', event => {
+    if (event.target.matches('h3')) {
+        const question = event.target;
+        const answer = question.nextElementSibling;
+
+        answer.hidden = !answer.hidden;
+    }
+})
 
 // 8. Készíts memóriajátékot!
 
