@@ -31,23 +31,32 @@
 // e) az eseményt eredetileg jelző objektumot;
 // f) span elemre kattintva a span elem szövegét.
 // g) Ha a hivatkozás szövege "libero", akkor ne kövesse a hivatkozást.
-
 const paragraph = document.querySelector('p#lorem');
 
 paragraph.addEventListener('click', event => {
+    // a
+    // target az az elem, amivel interaktálva az esemény kiváltásra került
+    // nem feltétlen az az elem amihez az eseménykezelő hozzá van adva
+    // "Egy esemény bekövetkezte mindig egy adott DOM objektumhoz kapcsolódik. Ezt nevezzük az esemény forrásobjektumának.
+    // Azonban az eseményt nemcsak ez az objektum jelzi, hanem annak szülője, majd annak szülője, szép sorban egészen a
+    // legfelső szintig a document objektumig. Ezt nevezzük az esemény buborékolásának."
+    // - http://webprogramozas.inf.elte.hu/tananyag/kliens/
     console.log(event.target);
 
-    // típus
+    // az esemény típusa, mindig az amit az eseménykezelőnek megadunk
     console.log(event.type);
 
-    // eseményspecfikius adattagok
+    // eseményspecifikus adattagok
     console.log(event.clientX, event.clientY);
 
-    // amire eseménykezelő van
+    // currentTarget mindig az az elem, amihez az eseménykezelő hozzá van adva
     console.log(event.currentTarget);
 
-    // CSS szelektor
+    // a matches függvénnyel megvizsgálható, hogy az adott elem megfelel-e a megadott CSS szelektornak
     if (event.target.matches('a') && event.target.innerText === 'libero') {
+        // bizonyos HTML elemeknek van alapból definiált eseménye (pl. <a>, <form>)
+        // az általunk definiált eseménykezelők hamarabb futnak le, ezért az
+        // alapértelemezett működés a preventDefault() metódussal megakadályozható
         event.preventDefault();
     }
 })
@@ -59,17 +68,25 @@ paragraph.addEventListener('click', event => {
 const handleInput = event => {
     const input = event.target;
 
-    if (!(/^d*$/).test(input.value)) {
+    // minden gépeléskor megvizsgáljuk az input új értéke csak számból áll-e
+    // reguláris kifejezés azt nézi, hogy csak tetszőleges számokból áll-e a string
+    if (!(/^\d*$/).test(input.value)) {
+        // a nem számjegy karaktereket üres stringre cseréljük
         input.value = input.value.replace(/[^\d/]/g, '');
     }
 }
 
+// naív megoldás: összes input.szam-ra registrálunk eseménykezelőt
+// nem rugalmas, nem hatékony
+
 // document.querySelectorAll('input.szam').forEach(input => input.addEventListener('input', handleInput));
 
-// delegálás
-
+// jobb, de absztraktabb megoldás: delegálás
+// A buborékolás miatt megtehetjük azt, hogy a konkrét elem helyett, annak egy szűlőjére regisztrálunk eseménykezelőt,
+// majd a függvény törzsében vizsgáljuk meg, ténylegesen a megadott gyerekelem váltotta-e ki az eseményt.
 document.addEventListener('input', event => {
     if (event.target.matches('input.szam')) {
+        // ezen a ponton biztosak vagyunk benne, hogy az eseményt egy input elem váltotta ki aminek van szam stílusosztálya
         handleInput(event);
     }
 })
@@ -79,6 +96,7 @@ document.addEventListener('click', event => {
     if (event.target.matches('a')) {
         const link = event.target;
 
+        // includes igaz, ha a stringben megtalálható a megadott substring
         if (!link.href.includes('.elte.hu')) {
             event.preventDefault();
         }
@@ -93,6 +111,8 @@ const faqDiv = document.querySelector('div.faq');
 faqDiv.addEventListener('click', event => {
     if (event.target.matches('h3')) {
         const question = event.target;
+
+        // nextElementSibling az adott elem következő Element testvére
         const answer = question.nextElementSibling;
 
         answer.hidden = !answer.hidden;
@@ -100,6 +120,89 @@ faqDiv.addEventListener('click', event => {
 })
 
 // 8. Készíts memóriajátékot!
+
+// Element CSS osztályai a classList property-n keresztül érhetőek el
+// classList.add('string') osztály hozzáadása
+// classList.remove('string') osztály eltávolítása
+// classList.toggle('string') osztály hozzáadása ha nincs, eltávolítása, ha van
+// classList.includes('string') igaz, ha az elem rendelkezik a stílusosztállyal
+
+// data attribútumok
+// saját HTML attribútumok, megadás HTML-ben data-* pl. data-id="1"
+// dataset mezőn keresztül érhetőek el
+// element.dataset.id = 1; írás
+// element.dataset.id; olvasás
+// 'id' in element.dataset; attribútom meglétének vizsgálata
+
+const Memory = size => {
+    // Állapottér
+    let firstSelectedCard = null;
+    let bothFlipped = false;
+
+    // Eseménykezelő
+    const handleClick = event => {
+        if (
+            event.target.matches('td') && // td-re kattintunk-e
+            !bothFlipped && // várjuk meg a setTimeOut végét
+            !event.target.classList.contains('flipped') // amire kattintunk nincs felfordítva
+        ) {
+            if (firstSelectedCard && !event.target.classList.contains('selected')) {
+                bothFlipped = true;
+                const secondSelectedCard = event.target;
+                secondSelectedCard.innerText = secondSelectedCard.dataset.number;
+                secondSelectedCard.classList.add('selected');
+
+                const flipped = firstSelectedCard.dataset.number === secondSelectedCard.dataset.number;
+                if (flipped) {
+                    firstSelectedCard.classList.add('flipped');
+                    secondSelectedCard.classList.add('flipped');
+                }
+
+                // setTimeout legalább n milliszekundum-ot vár mielőtt végrehajta a megadott kódot
+                // aszinkron, tehát nem blokkol a js fájl végrehajtása folytatódik
+                setTimeout(() => {
+                    firstSelectedCard.classList.remove('selected');
+                    secondSelectedCard.classList.remove('selected')
+
+                    if (!flipped) {
+                        firstSelectedCard.innerText = "";
+                        secondSelectedCard.innerText = "";
+                    }
+
+                    firstSelectedCard = null;
+                    bothFlipped = false;
+                }, 2000)
+
+
+            } else {
+                firstSelectedCard = event.target;
+                firstSelectedCard.classList.add('selected');
+                firstSelectedCard.innerText = firstSelectedCard.dataset.number;
+            }
+        }
+    }
+
+    // Markup / HTML
+    const gameTable = document.createElement('table');
+    gameTable.id = 'game';
+    gameTable.addEventListener('click', handleClick);
+
+    shuffleCards(size).forEach(row => {
+        const tr = document.createElement('tr');
+        row.forEach(cell => {
+            const td = document.createElement('td');
+            td.dataset.number = cell;
+            tr.appendChild(td);
+        })
+        gameTable.appendChild(tr);
+    })
+
+    return gameTable;
+}
+
+document.querySelector('div#memory').appendChild(Memory(4));
+
+// SEGÉDFÜGGVÉNYEK
 
 /**
  * Helper function to create the arrangement of cards in the memory game.
@@ -128,21 +231,3 @@ function shuffleArray(array) {
         [array[i], array[j]] = [array[j], array[i]];
     }
 }
-
-// 6. Valahány mozifilmről tároljuk a címét, megjelenési évét, hosszát és rendezőjét. Mivel sok film is lehet, ezért
-// olyan felületet szeretnénk, ahol egy szűrőmezőbe írva csak azok a filmcímek jelennek meg, amelyek tartalmazzák a
-// szűrőmezőbe írt szöveget. A kiválasztott filmcím fölé víve az egeret pedig jelenítsük meg az adott film összes
-// részletét!
-
-const movies = [
-    { title: "A remény rabjai", yearOfRelease: 1994, runtime: 142, director: "Frank Darabont" },
-    { title: "A keresztapa", yearOfRelease: 1972, runtime: 175, director: "Francis Ford Coppola" },
-    { title: "Ponyvaregény", yearOfRelease: 1994, runtime: 154, director: "Quentin Tarantino" },
-    { title: "A sötét lovag", yearOfRelease: 2008, runtime: 152, director: "Christopher Nolan" },
-    { title: "Schindler listája", yearOfRelease: 1993, runtime: 195, director: "Steven Spielberg" },
-    { title: "Forrest Gump", yearOfRelease: 1994, runtime: 142, director: "Robert Zemeckis" },
-    { title: "Eredet", yearOfRelease: 2010, runtime: 148, director: "Christopher Nolan" },
-    { title: "A Mátrix", yearOfRelease: 1999, runtime: 136, director: "The Wachowskis" },
-    { title: "Avatar", yearOfRelease: 2009, runtime: 162, director: "James Cameron" },
-    { title: "A Gyűrűk Ura: A gyűrű szövetsége", yearOfRelease: 2001, runtime: 178, director: "Peter Jackson" }
-];
