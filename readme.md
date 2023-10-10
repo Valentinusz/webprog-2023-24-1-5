@@ -7,19 +7,19 @@
 |1.   |2023. 09. 14.|Bevezetés, JS alapok       |
 |2.   |2023. 09. 21.|DOM, eseménykezelés I.     |
 |3.   |2023. 09. 28.|Eseménykezelés II.         |
-|4.   |2023. 10. 05.|CsoportZH, kódszervezés    |
-|5.   |2023. 10. 12.|Localstorage, canvas       |
-|6.   |2023. 10. 19.|Flappy bird                |
+|4.   |2023. 10. 05.|CsoportZH    |
+|5.   |2023. 10. 12.|Összetett alkalmazás, kódszervezés       |
+|6.   |2023. 10. 19.|Canvas, Flappy bird                |
 |7.   |2023. 10. 26.|PHP alapok, HTML generálás |
 |     |2023. 11. 02.|Elmarad (őszi szünet)      |
 |8.   |2023. 11. 09.|Űrlapfeldolgozás           |
 |9.   |2023. 11. 16.|Fájlkezelés, adattárolás   |
 |10.  |2023. 11. 23.|CsoportZH, munkamenet      |
-|11.  |2023. 11. 30.|CRUD alkalmazás összerakása|
-|12.  |2023. 12. 07.|AJAX                       |
+|11.  |2023. 11. 30.|AJAX I.|
+|12.  |2023. 12. 07.|AJAX II.                      |
 |13.  |2023. 12. 14.|Kitekintés                 |
 
-## ![Követelmények]()
+## ![Követelmények](https://canvas.elte.hu/courses/38953/pages/kovetelmenyek?module_item_id=546551)
 
 ## ![2-es kurzus github repoja](https://github.com/Valentinusz/webprog-2023-24-1-2)
 
