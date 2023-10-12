@@ -1,3 +1,7 @@
+export const generateGridContent = (grid) => grid.map(
+    row => `<tr>${row.map(cell => `<td style="background-color: ${cell}"></td>`).join(" ")}</tr>`
+).join("");
+
 /**
  *
  * @param width {?number|undefined}
@@ -8,18 +12,21 @@ export function PixelArtEditor({width, height, initialGrid}) {
     let primaryColor = '#FF0000'
     let secondaryColor = '#FFFFFF';
     const grid = initialGrid ?? Array.from({length: height}).map(() => Array.from({length: width}).fill(secondaryColor));
-    console.table(grid)
+    const colors = Array.from({length: 10}).fill('#FFFFFF');
 
     const draw = (row, column, color) => grid[row][column] = color;
 
-    draw(0, 0, primaryColor);
+    const pickColor = (newColor) => {
+        colors.pop();
+        colors.unshift(newColor);
+
+        return primaryColor = newColor;
+    }
 
     const gridTable = document.createElement('table');
     gridTable.classList.add('edit');
 
-    gridTable.innerHTML = grid.map(
-        row => `<tr>${row.map(cell => `<td style="background-color: ${cell}"></td>`).join(" ")}</tr>`
-    ).join("");
+    gridTable.innerHTML = generateGridContent(grid);
 
     const handleClick = (event, isDrawing) => {
         if (event.target.matches('td')) {
@@ -30,20 +37,38 @@ export function PixelArtEditor({width, height, initialGrid}) {
         }
     }
 
-    gridTable.addEventListener('click', event => handleClick(event, true))
+    gridTable.addEventListener('click', event => handleClick(event, true));
 
     gridTable.addEventListener('contextmenu', event => {
         event.preventDefault();
         handleClick(event, false);
+    });
+
+    const menuBar = document.createElement('div');
+
+    const colorInput = Object.assign(document.createElement('input'), {type: 'color'});
+    menuBar.appendChild(colorInput);
+
+    const generateColorListContent = (colors) => colors.map((color, index) => `<li data-index="${index}" style="background-color: ${color}"></li>`).join("");
+
+    const colorList = document.createElement('ol');
+    colorList.classList.add('colors')
+    colorList.innerHTML = generateColorListContent(colors);
+
+    colorList.addEventListener('click', event => {
+        if (event.target.matches('li')) {
+            console.log(colors)
+            colorInput.value = pickColor(colors[event.target.dataset.index]);
+        }
     })
 
-    // for (let i = 0; i < height; i++) {
-    //     const tr = document.createElement('tr');
-    //     for (let j = 0; j < width; j++) {
-    //         tr.appendChild(document.createElement('td'));
-    //     }
-    //     gridTable.appendChild(tr);
-    // }
+    menuBar.appendChild(colorList);
 
-    return gridTable;
+    colorInput.addEventListener('change', event => {
+        pickColor(event.target.value);
+        colorList.innerHTML = generateColorListContent(colors);
+    });
+
+    return [menuBar, gridTable];
 }
+
