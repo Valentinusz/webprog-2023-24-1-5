@@ -1,0 +1,50 @@
+table.preview, table.edit {
+    border-collapse: collapse;
+}
+
+table.preview td {
+    border: none;
+    width: 5px;
+    height: 5px;
+    padding: 0;
+}
+table.edit td {
+    border: 1px solid lightgray;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+}
+
+input.invalid {
+    border-color: darkred;
+}
+
+ol.colors {
+    display: flex;
+    list-style: none;
+    gap: 5px;
+}
+
+ol.colors li {
+    width: 15px;
+    height: 15px;
+    border: 1px black solid;
+}
+
+input[type='color'] {
+    height: 40px;
+    width: 40px;
+    padding: 0;
+    border: 0;
+    margin: 0.25rem;
+    outline: 0;
+}
+
+.menubar {
+    display: flex;
+}
+
+.list {
+    list-style: none;
+    display: flex;
+}
