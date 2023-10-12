@@ -16,6 +16,8 @@ export const makeGalleryContent = (arts) => arts.map(
  */
 export function PixelArtApp() {
     // állapottér
+    // az alkalmazás működtetéséhez szükséges adatok
+    // érdemes az alkalmazást egy állapotgépként felfogni
     const pixelArts = [
         {id: 1, canvas: [['#FFF', '#000' ,'#FFF'], ['#FFF', '#000' ,'#FFF'], ['#000', '#000' ,'#000']]},
         {id: 2, canvas: [['#000', '#000' ,'#000'], ['#FFF', '#000' ,'#FFF'], ['#FFF', '#000' ,'#FFF']]},
@@ -25,6 +27,8 @@ export function PixelArtApp() {
     let selectedArt = undefined;
 
     // állapotátmenetek
+    // az adatok frissítésért felelős műveletekek
+    // az eseménykezelő függvények hívják meg őket
     const createNewGrid = () => {
         selectedArt = undefined;
     }
@@ -39,6 +43,7 @@ export function PixelArtApp() {
             pixelArts.push(selectedArt);
         }
     }
+    // ha jobban el szeretnénk választani, akkor érdemes az állapotot és az állapotátmeneteket külön szervezni
 
     // eseménykezelők
     const handleCreateButtonClick = (width, height) => {
@@ -64,6 +69,12 @@ export function PixelArtApp() {
     }
 
     // felület
+    // a fületet és az adat közt az eseménykezelő függvények teremtenek kapcsolatot
+    // állapotátmeneti függvényeket hívnak
+    // az új állapot alapján frissítik a felületet, ehhez két megközelítés van
+    //   imperatív - specifikusan frissítem a felületet ahol kell (hatékony)
+    //   deklaratív - a felületem egy részét felülírom egy újonnan előállított felületrészlettel (kényelmes)
+    // helyes megoldás valahol a kettő között van, de ez nem ennek a tárgynak a témája
     const div = document.createElement('div');
     div.appendChild(PixelArtForm({min: 5, max: 100, handleSubmit: handleCreateButtonClick}));
 
