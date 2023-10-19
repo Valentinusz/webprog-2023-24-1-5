@@ -18,11 +18,7 @@ export function PixelArtApp() {
     // állapottér
     // az alkalmazás működtetéséhez szükséges adatok
     // érdemes az alkalmazást egy állapotgépként felfogni
-    const pixelArts = [
-        {id: 1, canvas: [['#FFF', '#000' ,'#FFF'], ['#FFF', '#000' ,'#FFF'], ['#000', '#000' ,'#000']]},
-        {id: 2, canvas: [['#000', '#000' ,'#000'], ['#FFF', '#000' ,'#FFF'], ['#FFF', '#000' ,'#FFF']]},
-        {id: 3, canvas: [['#000', '#000' ,'#000'], ['#FFF', '#FFF' ,'#FFF'], ['#FFF', '#000' ,'#FFF']]}
-    ];
+    const pixelArts = JSON.parse(localStorage.getItem('arts')) ?? [];
 
     let selectedArt = undefined;
 
@@ -42,6 +38,7 @@ export function PixelArtApp() {
             selectedArt = {id: pixelArts.length + 1, canvas: grid};
             pixelArts.push(selectedArt);
         }
+        localStorage.setItem('arts', JSON.stringify(pixelArts))
     }
     // ha jobban el szeretnénk választani, akkor érdemes az állapotot és az állapotátmeneteket külön szervezni
 
