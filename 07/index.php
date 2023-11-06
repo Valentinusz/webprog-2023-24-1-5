@@ -75,7 +75,7 @@
 </div>
 
 <div>
-    <h2>5. feladat</h2>
+    <h2>6. feladat</h2>
     <?php $categories = [5 => "Akció", 4 => "Dráma", 8 => "Vígjáték"]; ?>
     <select>
         <?php foreach ($categories as $id => $name): ?>
