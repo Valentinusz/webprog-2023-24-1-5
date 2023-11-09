@@ -19,13 +19,13 @@ $filtered_workers = isset($_GET['name'])
     ? array_filter($workers, fn($w) => str_contains(strtolower($w['name']), strtolower($_GET['name'])))
     : $workers;
 
-$max = array_reduce($filtered_workers, fn($max, $current) => max($max, $current['salary']), 0);
-
 $jobs = array_unique(array_map(fn($w) => $w['job'], $workers));
 
-$filtered_workers = isset($_GET['job'])
-    ? array_filter($workers, fn($w) => $w['job'] === $_GET['job'] )
-    : $workers;
+$filtered_workers = isset($_GET['job']) && strlen($_GET['job']) != 0
+    ? array_filter($filtered_workers, fn($w) => $w['job'] === $_GET['job'] )
+    : $filtered_workers;
+
+$max = array_reduce($filtered_workers, fn($max, $current) => max($max, $current['salary']), 0);
 
 ?>
 
