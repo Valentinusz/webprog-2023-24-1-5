@@ -14,8 +14,8 @@
 |     |2023. 11. 02.|Elmarad (őszi szünet)      |
 |8.   |2023. 11. 09.|Űrlapfeldolgozás           |
 |9.   |2023. 11. 16.|Fájlkezelés, adattárolás   |
-|10.  |2023. 11. 23.|CsoportZH, munkamenet      |
-|11.  |2023. 11. 30.|AJAX I.|
+|10.  |2023. 11. 23.|CsoportZH, munkamenet I.      |
+|11.  |2023. 11. 30.|Munkamenet II. AJAX I.|
 |12.  |2023. 12. 07.|AJAX II.                      |
 |13.  |2023. 12. 14.|Kitekintés                 |
 
