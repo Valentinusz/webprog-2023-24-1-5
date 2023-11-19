@@ -18,6 +18,9 @@ $workers = [
 // minden érték string típusként érkezik, ha számként akarnánk használni konverziót kéne végezni
 var_dump($_GET);
 
+// munka típusok lekérése (select generáláshoz)
+$jobs = array_unique(array_map(fn($w) => $w['job'], $workers));
+
 // isset megvizsgálja létezik-e az adott változó
 // esetünkben, ha igen akkor a felhasználó szűrni akart a dolgozó nevére
 if (isset($_GET['name'])) {
@@ -35,8 +38,7 @@ if (isset($_GET['job']) && strlen($_GET['job']) != 0) {
     $workers = array_filter($workers, fn($w) => $w['job'] === $_GET['job']);
 }
 
-// munka típusok lekérése (select generáláshoz)
-$jobs = array_unique(array_map(fn($w) => $w['job'], $workers));
+
 
 // maximum fizetés meghatározása
 $max = array_reduce(
