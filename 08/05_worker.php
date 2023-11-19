@@ -34,11 +34,9 @@ if (isset($_GET['name'])) {
 
 // hasonlóan járunk el a job esetében is
 // 'job' kulcs hiánya vagy üressége azt jelenti a felhasználó nem akart szűrni
-if (isset($_GET['job']) && strlen($_GET['job']) != 0) {
+if (isset($_GET['job']) && strlen($_GET['job']) !== 0) {
     $workers = array_filter($workers, fn($w) => $w['job'] === $_GET['job']);
 }
-
-
 
 // maximum fizetés meghatározása
 $max = array_reduce(
