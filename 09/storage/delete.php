@@ -1,5 +1,6 @@
 <?php
 
+// ha nincs azonosító paraméter irányítsuk vissza a felhasználót
 if (!isset($_GET['id'])) {
     header('Location: index.php');
     exit();

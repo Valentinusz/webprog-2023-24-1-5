@@ -1,16 +1,19 @@
 <?php
 
+// ha nincs azonosító paraméter irányítsuk vissza a felhasználót
+if (!isset($_GET['id'])) {
+    header('Location: index.php');
+    exit();
+}
+
 require_once 'ContactStorage.php';
 
-if (isset($_GET['id'])) {
-    $contacts = new ContactStorage();
-    $contact = $contacts->findById($_GET['id']);
+$contacts = new ContactStorage();
 
-    if ($contact == null) {
-        header('Location: index.php');
-        exit();
-    }
-} else {
+$contact = $contacts->findById($_GET['id']);
+
+// ha nincs ilyen rekord szintén
+if ($contact == null) {
     header('Location: index.php');
     exit();
 }
@@ -67,18 +70,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <form method='post'>
         <label for='name'>Név*</label>
-        <input id='name' name='name' value='<?= isset($errors) ? $name : $contact['name'] ?>'>
+        <input id='name' name='name' value='<?= $name ?? $contact['name'] ?>'>
         <?php if(isset($errors['name'])): ?><span><?= $errors['name'] ?></span><?php endif; ?>
         <br>
 
 
         <label for='email'>Email*</label>
-        <input id='email' name='email' value='<?= isset($errors) ? $email : $contact['email'] ?>'>
+        <input id='email' name='email' value='<?= $email ?? $contact['email'] ?>'>
         <?php if(isset($errors['email'])): ?><span><?= $errors['email'] ?></span><?php endif; ?>
         <br>
 
         <label for='phone'>Telefonszám</label>
-        <input id='phone' name='phone' value='<?= isset($errors) ? $phone : $contact['phone'] ?>'>
+        <input id='phone' name='phone' value='<?= $phone ?? $contact['phone'] ?>'>
         <?php if(isset($errors['phone'])): ?><span><?= $errors['phone'] ?></span><?php endif; ?>
         <br>
 
