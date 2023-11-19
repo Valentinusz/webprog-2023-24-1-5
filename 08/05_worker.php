@@ -1,4 +1,5 @@
 <?php
+// http://webprogramozas.inf.elte.hu/#!/subjects/webprog-pti/gyak/09
 
 $workers = [
     ['name' => 'KING', 'job' => 'PRESIDENT', 'salary' => 5000],
@@ -13,20 +14,36 @@ $workers = [
     ['name' => 'FORD', 'job' => 'ANALYST', 'salary' => 3000]
 ];
 
+// $_GET szuperglobális tömb  tartalmazza az URL paramétereket
+// minden érték string típusként érkezik, ha számként akarnánk használni konverziót kéne végezni
 var_dump($_GET);
 
-$filtered_workers = isset($_GET['name'])
-    ? array_filter($workers, fn($w) => str_contains(strtolower($w['name']), strtolower($_GET['name'])))
-    : $workers;
+// isset megvizsgálja létezik-e az adott változó
+// esetünkben, ha igen akkor a felhasználó szűrni akart a dolgozó nevére
+if (isset($_GET['name'])) {
+    // workers tömböt felülírhatjuk, mivel minden kérésnél új PHP szkript indul
+    $workers = array_filter(
+            $workers,
+            fn($w) => str_contains(strtolower($w['name']),
+            strtolower($_GET['name']))
+    );
+}
 
+// hasonlóan járunk el a job esetében is
+// 'job' kulcs hiánya vagy üressége azt jelenti a felhasználó nem akart szűrni
+if (isset($_GET['job']) && strlen($_GET['job']) != 0) {
+    $workers = array_filter($workers, fn($w) => $w['job'] === $_GET['job']);
+}
+
+// munka típusok lekérése (select generáláshoz)
 $jobs = array_unique(array_map(fn($w) => $w['job'], $workers));
 
-$filtered_workers = isset($_GET['job']) && strlen($_GET['job']) != 0
-    ? array_filter($filtered_workers, fn($w) => $w['job'] === $_GET['job'] )
-    : $filtered_workers;
-
-$max = array_reduce($filtered_workers, fn($max, $current) => max($max, $current['salary']), 0);
-
+// maximum fizetés meghatározása
+$max = array_reduce(
+        $workers,
+        fn($max, $current) => max($max, $current['salary']),
+        0
+);
 ?>
 
 <!DOCTYPE html>
@@ -38,6 +55,7 @@ $max = array_reduce($filtered_workers, fn($max, $current) => max($max, $current[
 <body>
     <form>
         <label for='name'>Név</label>
+        <!-- Felhasználóbarát állapottartóvá tenni az űrlapot. -->
         <input id='name' name='name' value='<?= $_GET['name'] ?? '' ?>'>
         <button>Szűrés</button>
 
@@ -57,7 +75,7 @@ $max = array_reduce($filtered_workers, fn($max, $current) => max($max, $current[
             <th>Fizetés</th>
         </tr>
         </thead>
-        <?php foreach ($filtered_workers as $worker): ?>
+        <?php foreach ($workers as $worker): ?>
             <tr <?php if($worker['salary'] === $max): ?> style='background-color: orange' <?php endif; ?>>
                 <td><?= $worker['name'] ?></td>
                 <td><?php echo $worker['job'] ?></td>
