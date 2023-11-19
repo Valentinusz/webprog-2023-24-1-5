@@ -57,7 +57,6 @@ $max = array_reduce(
         <label for='name'>Név</label>
         <!-- Felhasználóbarát állapottartóvá tenni az űrlapot. -->
         <input id='name' name='name' value='<?= $_GET['name'] ?? '' ?>'>
-        <button>Szűrés</button>
 
         <label for='job'>Foglalkozás</label>
         <select id='job' name='job'>
@@ -66,6 +65,7 @@ $max = array_reduce(
                 <option <?= isset($_GET['job']) && $_GET['job'] === $job ? 'selected' : '' ?>><?= $job ?></option>
             <?php endforeach; ?>
         </select>
+        <button>Szűrés</button>
     </form>
     <table>
         <thead>
