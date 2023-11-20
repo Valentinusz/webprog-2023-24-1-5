@@ -7,6 +7,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $success = validate($errors, $data);
 
     if ($success) {
+		// file_get_contents egy fájl tartalmát beovlassa stringként
+		// json_decode egy stringet JSON-ként értelmez
+		// alapból objektumént adja vissza, ha asszociatív paraméter true akkor asszociatív tömbbe
+		// null ha nem sikerül a parse-olás
         $contacts = json_decode(file_get_contents('data.json'), true) ?? [];
 
         // unique id egyedi azonosítót állít elő

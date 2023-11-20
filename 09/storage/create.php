@@ -1,4 +1,6 @@
 <?php
+require_once 'ContactStorage.php';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = [];
     $data = [];
@@ -6,8 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $success = validate($errors, $data);
 
     if ($success) {
-        require_once 'ContactStorage.php';
-
         $contacts = new ContactStorage();
         $contacts->add($data);
 

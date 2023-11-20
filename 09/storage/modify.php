@@ -54,7 +54,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (count($errors) === 0) {
-        $contacts->update($_GET['id'], ['name' => $name, 'email' => $email, 'phone' => $phone === '' ? null : $phone]);
+		$newValue = ['name' => $name, 'email' => $email, 'phone' => $phone === '' ? null : $phone]
+		
+        $contacts->update($_GET['id'], $newValue);
+		
+		header('Location: index.php');
         exit();
     }
 }
