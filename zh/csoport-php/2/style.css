@@ -1,0 +1,59 @@
+/* közös rész */
+
+@import "https://fonts.googleapis.com/css?family=Lato";
+
+body {
+    width: 70%;
+    font-family: Lato, sans-serif;
+    font-size: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1, h2 {
+    text-align: center;
+    text-transform: uppercase;
+}
+
+/* 1. feladat */
+
+table, .center {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+table, td, th {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+td, th {
+    padding: 0 10px;
+}
+
+/* 2. feladat */
+
+label:nth-of-type(1), label:nth-of-type(2) {
+    width: 200px;
+    display: inline-block;
+}
+
+input, button {
+    font-family: Lato, sans-serif;
+    font-size: 20px;
+}
+
+form {
+    color: red;
+}
+
+form label {
+    color: black;
+}
+
+/* 3. feladat */
+
+a {
+    color: blue;
+}
