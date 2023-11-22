@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (count($errors) === 0) {
-		$newValue = ['name' => $name, 'email' => $email, 'phone' => $phone === '' ? null : $phone]
+		$newValue = ['name' => $name, 'email' => $email, 'phone' => $phone === '' ? null : $phone];
 		
         $contacts->update($_GET['id'], $newValue);
 		
