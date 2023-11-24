@@ -15,9 +15,9 @@
 |8.   |2023. 11. 09.|Űrlapfeldolgozás           |
 |9.   |2023. 11. 16.|Adattárolás   |
 |10.  |2023. 11. 23.|CsoportZH, apróságok     |
-|11.  |2023. 11. 30.|Munkamenet, AJAX I.|
-|12.  |2023. 12. 07.|AJAX II.                      |
-|13.  |2023. 12. 14.|Kitekintés                 |
+|11.  |2023. 11. 30.|Autentikáció, munkamenet|
+|12.  |2023. 12. 07.|AJAX                      |
+|13.  |2023. 12. 14.|Kitekintés/Gyakorlás                 |
 
 ## [Követelmények](https://canvas.elte.hu/courses/38953/pages/kovetelmenyek?module_item_id=546551)
 
