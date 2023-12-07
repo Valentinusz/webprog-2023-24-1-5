@@ -1,0 +1,151 @@
+@charset "UTF-8";
+@import "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Open+Sans:ital,wght@0,400;0,500;1,400;1,500&family=Roboto:wght@400;500;700&display=swap";
+
+* {
+  font-family: "Open Sans", sans-serif;
+}
+
+h2 {
+  font-weight: 500;
+}
+
+body {
+  margin: 0;
+}
+
+button {
+  transition-duration: 0.2s;
+  border: none;
+  background: none;
+}
+
+nav[role="menubar"] {
+  font-size: 1.5em;
+  background: #022854;
+  color: white;
+  padding-right: 0.5rem;
+  height: 3em;
+}
+
+nav[role="menubar"] ol {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0 0.5rem;
+}
+
+nav[role="menubar"] ol li {
+  height: 100%;
+  line-height: 3em;
+  vertical-align: center;
+}
+
+nav[role="menubar"] ol li a {
+  text-decoration: none;
+  color: white;
+}
+
+nav[role="menubar"] ol li a:hover {
+  color: lightgray;
+}
+
+header[role="banner"] {
+  background: radial-gradient(circle, #009fa3 59%, #00bec3 100%);
+}
+
+header[role="banner"] h1 {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  text-align: center;
+  color: white;
+  text-shadow: 0 1px black;
+  font-size: 5rem;
+  font-variant: all-petite-caps;
+  margin: 0;
+}
+
+input:focus {
+  outline-color: #009fa3;
+  border-color: #009fa3;
+}
+
+label {
+  margin-bottom: 1rem;
+}
+
+input {
+  height: 2.5rem;
+  line-height: 2.5rem;
+  border: 1px solid lightgray;
+  box-sizing: border-box;
+  border-radius: 3px;
+  width: 100%;
+}
+
+form button[type="submit"] {
+  font-size: 1.2rem;
+  color: white;
+  padding: 8px 14px;
+  background-color: #009fa3;
+  margin-top: 20px;
+}
+
+form button[type="submit"]:hover {
+  background-color: #022854;
+}
+
+button.delete {
+  background-color: darkred;
+  border-radius: 3px;
+  padding: 0.25rem;
+  color: white;
+}
+
+span.error {
+  color: darkred;
+}
+
+div.error {
+  border: 1px solid darkred;
+  border-radius: 5px;
+  padding: 0.5em 0.25em;
+  background-color: #ffe0e0;
+}
+
+main {
+  margin: 1rem 2.5rem;
+}
+
+main h2 {
+  font-size: 2em;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+
+}
+
+tr {
+  border-bottom: 1px lightgray solid;
+
+  &:last-child {
+      border-bottom: none;
+  }
+}
+
+th {
+  text-align: left;
+  font-size: 1.35em;
+  font-weight: 500;
+}
+
+tbody tr:hover, tbody tr:focus {
+  background-color: lightgray;
+}
+
+tbody tr:focus {
+  outline-color: #009fa3;
+}

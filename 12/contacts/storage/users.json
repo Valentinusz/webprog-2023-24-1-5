@@ -1,0 +1,18 @@
+{
+    "656848fb9dc48": {
+        "username": "user1",
+        "password": "$2y$10$TWeUpyQ2qXugAto3zjm6o.CFRiT1RYujU7ee0bddTn9ml6jFidBQC",
+        "roles": [
+            "user"
+        ],
+        "id": "656848fb9dc48"
+    },
+    "6568490207243": {
+        "username": "user2",
+        "password": "$2y$10$9a9RXOI6EtemMkddZQeFieh15NO0v8IwKTBrcn37rQXYRzyKU4VEa",
+        "roles": [
+            "user"
+        ],
+        "id": "6568490207243"
+    }
+}
