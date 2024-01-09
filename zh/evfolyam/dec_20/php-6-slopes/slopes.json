@@ -1,0 +1,30 @@
+{
+    "6581e483f08ce": {
+        "id": "6581e483f08ce",
+        "name": "Signalasdasdsadasdad",
+        "length": "882",
+        "color": "red",
+        "dangers": [
+            "learners",
+            "fog",
+            "accident"
+        ]
+    },
+    "6581e48400470": {
+        "name": "Combe Charbonni\u00e8re",
+        "length": 3000,
+        "color": "black",
+        "dangers": [
+            "ice",
+            "accident"
+        ],
+        "id": "6581e48400470"
+    },
+    "659d1e1717cf5": {
+        "id": "659d1e1717cf5",
+        "name": "asd",
+        "length": "232323",
+        "color": "red",
+        "dangers": []
+    }
+}

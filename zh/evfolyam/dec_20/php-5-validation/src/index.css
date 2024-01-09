@@ -1,0 +1,14 @@
+@import url("https://cdn.jsdelivr.net/gh/elte-fi/www-assets@19.10.16/styles/mdss.min.css");
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+#confirm-email {
+    margin-top: 1rem;
+    font-size: larger;
+    font-weight: bold;
+    color: #af2727;
+    display: block;
+}

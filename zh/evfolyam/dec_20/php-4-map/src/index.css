@@ -1,0 +1,17 @@
+@import url("https://cdn.jsdelivr.net/gh/elte-fi/www-assets@19.10.16/styles/mdss.min.css");
+
+li, circle, text {
+    cursor: pointer;
+}
+li:hover, circle:hover, text:hover {
+    color: red;
+    fill: red;
+}
+.not-selected {
+    color: #f0f0f0;
+    fill: #f0f0f0;
+}
+.selected {
+    color: red;
+    fill: red;
+}

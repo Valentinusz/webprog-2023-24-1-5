@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 2</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <h1>2. Elevator lines</h1>
+  <div id="map">
+    <div id="information"></div>
+    <div id="lines"></div>
+  </div>
+  <form id="selected-line-form">
+    <fieldset>
+      <legend>Selected line</legend>
+      <div>
+        <label>name = <input type="text" id="selected-name"></label> <br>
+        <button type="button" id="start">Start</button>
+        <button type="button" id="automatic">Automatic on/off</button>
+      </div>
+    </fieldset>
+  </form>
+  <form id="new-line-form">
+    <fieldset>
+      <legend>New line</legend>
+      <div>
+        <label>name = <input type="text" id="new-name"></label>
+      </div>
+      <div>
+        <label>x1 = <input type="number" id="new-x1" step="any"></label> <br>
+        <label>y1 = <input type="number" id="new-y1" step="any"></label> 
+      </div>
+      <div>
+        <label>x2 = <input type="number" id="new-x2" step="any"></label> <br>
+        <label>y2 = <input type="number" id="new-y2" step="any"></label> 
+        <button id="select" type="button">Select</button>
+      </div>
+      <button type="button">Save</button>
+    </fieldset>
+  </form>
+
+  <script src="index.js"></script>
+</body>
+</html>
